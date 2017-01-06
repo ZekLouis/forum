@@ -33,6 +33,9 @@
 
                 if($res){
                     echo "<div class=\"alert alert-success\"><strong>Succès!</strong> Connexion réussie.</div>";
+                    echo $_POST['pseudo'];
+                    $_SESSION['pseudo'] = $_POST['pseudo'];
+                    //AJAX pour rafraichir le header
                 }else{
                     echo "<div class=\"alert alert-danger\"><strong>Erreur!</strong> Pseudo ou Mot de passe incorrect</div>";
                 }

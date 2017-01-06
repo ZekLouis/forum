@@ -17,8 +17,10 @@
 				include_once('pages/inscription.inc.php');
 				break;
 			case 3:
-				include_once('pages/post.inc.php');
+				include_once('pages/deconnexion.inc.php');
 				break;
+			case 4:
+				include_once('pages/profil.inc.php');
 			default : 	
 				include_once('pages/main.inc.php');
 		}

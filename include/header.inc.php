@@ -25,12 +25,23 @@
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="index.php?page=0">Accueil</a></li>
 					</ul>
-					
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="index.php?page=2"><span class="glyphicon glyphicon-user"></span> Inscription</a></li>
-						<li><a href="index.php?page=1"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>
-					</ul>
-
+					<?php
+						if(!isset($_SESSION['pseudo'])){
+					?>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="index.php?page=2"><span class="glyphicon glyphicon-user"></span> Inscription</a></li>
+							<li><a href="index.php?page=1"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>
+						</ul>
+					<?php
+						}else{
+					?>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="index.php?page=4"><?php echo $_SESSION['pseudo'];?></a></li>
+							<li><a href="index.php?page=3"><span class="glyphicon glyphicon-log-out"></span> Deconnexion</a></li>
+						</ul>
+					<?php
+						}
+					?>
 					<!-- Implémenter recherche -->
 					<form class="navbar-form navbar-right">
 						<div class="input-group">
