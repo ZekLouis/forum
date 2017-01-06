@@ -16,17 +16,17 @@
                 <input class="form-control" name="pseudo" required /><br /> -->
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="text" class="form-control" name="pseudo" placeholder="Pseudo">
+                    <input type="text" class="form-control" name="pseudo" placeholder="Pseudo" required>
                 </div><br />
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input id="password" type="password" class="form-control" name="password" placeholder="Password">
+                    <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
                 </div><br />
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                    <input id="mail" type="email" class="form-control" name="mail" placeholder="Email">
+                    <input id="mail" type="email" class="form-control" name="mail" placeholder="Email" required>
                 </div><br />
-                <input class="form-control" type="submit" value="Connexion" />
+                <input class="form-control" type="submit" value="Inscription" />
             </form>
 
         <?php

@@ -16,7 +16,7 @@
                 <input class="form-control" name="pseudo" required /><br /> -->
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="text" class="form-control" name="pseudo" placeholder="Pseudo">
+                    <input id="pseudo" type="text" class="form-control" onchange="checkPseudo();" name="pseudo" placeholder="Pseudo">
                 </div><br />
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
@@ -42,3 +42,11 @@
         ?>
     </div>
 </div>
+
+<script>
+    function checkPseudo(){
+        var pseudo = document.getElementById('pseudo').value;
+        alert(pseudo);
+        //$.getJSON( "php/postScore.php?pseudo="+pseudo);
+    }
+</script>
