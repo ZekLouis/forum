@@ -21,7 +21,7 @@ class UserManager{
 	}
 
     public function connexion($login,$mdp){
-		$sql = "SELECT pseudo from user where pseudo=\"".$login."\" and password=\"".$mdp."\";";
+		$sql = "SELECT pseudo from user where pseudo=$login and password=$mdp;";
 		$req = $this->db->query($sql);
 		$result = $req->fetch(PDO::FETCH_ASSOC);
 		if(empty($result)){
@@ -32,9 +32,11 @@ class UserManager{
 	}
 
 	public function pseudoExiste($pseudo){
-		$sql = "SELECT pseudo from user where pseudo=\"".$pseudo."\";";
+		$sql = "SELECT pseudo from user where pseudo=\"$pseudo\";";
+		//echo $sql;
 		$req = $this->db->query($sql);
-		$result = $req->fetch(PDO::FETCH_ASSOC);
+		$result = $req->fetch();
+		//echo $result;
 		if(empty($result)){
 			return false;
 		}else{
