@@ -5,6 +5,26 @@
     //TODO Inscription toutes les vérifications chaque champ
 ?>
 
+<script>
+    var counter = 3;
+    var intervalId = null;
+    function action(){
+        clearInterval(intervalId);
+        window.location.replace("index.php");
+    }
+
+    function bip(){
+        counterTemp = counter - 1 
+        document.getElementById("redirection").innerHTML = "<strong>Succès!</strong> Connexion réussie. Redirection ... " + counterTemp;
+        counter--;
+    }
+    
+    function start(){
+        intervalId = setInterval(bip, 1000);
+        setTimeout(action, counter * 1000);
+    }
+</script>
+
 <div class="row">
     <div class="col-md-4 col-lg-offset-4">
         <h2 class="text-center">Connexion</h2>
@@ -34,9 +54,9 @@
                 $res = $UserManager->connexion($_POST['pseudo'],$password_crypte);
 
                 if($res){
-                    echo "<div class=\"alert alert-success\"><strong>Succès!</strong> Connexion réussie. Redirection ... </div>";
+                    echo "<div id=\"redirection\" class=\"alert alert-success\"><strong>Succès!</strong> Connexion réussie. Redirection ... </div>";
                     $_SESSION['pseudo'] = $_POST['pseudo'];
-                    echo "<script>setTimeout(function(){ window.location.replace(\"index.php\"); }, 3000);</script>";
+                    echo "<script>start();</script>";
                     //AJAX pour rafraichir le header
                 }else{
                     echo "<div class=\"alert alert-danger\"><strong>Erreur!</strong> Pseudo ou Mot de passe incorrect</div>";
@@ -55,10 +75,16 @@
         $.getJSON("include/pages/checkPseudo.php?pseudo="+pseudo, function(data){
             console.log(data)
             if(data=='0'){
-                document.getElementById('div1').className += ' has-success'
+                if($("#div1").hasClass("has-error")){
+                    document.getElementById('div1').className = 'input-group has-success'
+                }else{
+                    document.getElementById('div1').className += ' has-success'
+                }
             }else{
                 if($("#div1").hasClass("has-success")){
-                    document.getElementById('div1').className = 'input-group'
+                    document.getElementById('div1').className = 'input-group has-error'
+                }else{
+                    document.getElementById('div1').className += ' has-error'
                 }
             }
         });
