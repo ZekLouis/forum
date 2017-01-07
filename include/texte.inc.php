@@ -21,6 +21,15 @@
 				break;
 			case 4:
 				include_once('pages/profil.inc.php');
+				break;
+			case 5:
+				include_once('pages/nouveau_post.php');
+				break;
+
+			case 6:
+				include_once('pages/voir_post.inc.php');
+				break;
+
 			default : 	
 				include_once('pages/main.inc.php');
 		}

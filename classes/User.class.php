@@ -68,3 +68,4 @@ class User{
         return $this->mail;
     }
 }
+?>

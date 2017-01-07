@@ -1,7 +1,9 @@
 <?php
     $db = new Mypdo();
     $UserManager = new UserManager($db);
-
+    if(isset($_SESSION['pseudo'])){
+        echo "Vous êtes déjà connecté.";
+    }
     //TODO Inscription toutes les vérifications chaque champ
 ?>
 
@@ -20,8 +22,26 @@
     }
     
     function start(){
+        bip();
         intervalId = setInterval(bip, 1000);
         setTimeout(action, counter * 1000);
+    }
+    
+    function connexion(){
+        $("#fail").slideUp(300);
+        pseudo = $("#pseudo").val();
+        mdp = $("#password").val();
+        $.getJSON("include/pages/checkPseudo.php?pseudo="+pseudo+"&password="+mdp+"&requete=2", function(data){
+            console.log(data)
+            if(data=='0'){
+                document.getElementById('div2').className = 'input-group has-success'
+                
+                $("#redirection").slideDown(300);
+                start();
+            }else{
+                $("#fail").slideDown(300);
+            }
+        });
     }
 </script>
 
@@ -30,25 +50,28 @@
         <h2 class="text-center">Connexion</h2>
 
         <?php
-            if(!isset($_POST['pseudo']) and !isset($_POST['password'])){
+            //if(!isset($_POST['pseudo']) and !isset($_POST['password'])){
         ?>
 
-            <form action="#" method="post">
+           
                 <!-- <label>Pseudo :</label><br />
                 <input class="form-control" name="pseudo" required /><br /> -->
                 <div id="div1" class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <input id="pseudo" type="text" class="form-control form-control-success" onchange="checkPseudo();" name="pseudo" placeholder="Pseudo">
                 </div><br />
-                <div class="input-group">
+                <div id="div2" class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input id="password" type="password" class="form-control" name="password" placeholder="Password">
+                    <input id="password" type="password" class="form-control form-control-success" name="password" placeholder="Password">
                 </div><br />
-                <input class="form-control" type="submit" value="Connexion" />
-            </form>
-
+                <button class="form-control" onclick="connexion();">Connexion</button>
+           
+            
+            <div id="redirection" class="alert alert-success"><strong>Succès!</strong> Connexion réussie. Redirection ... </div>
+            <div id="fail" class="alert alert-danger"><strong>Erreur!</strong> Pseudo ou Mot de passe incorrect</div>
+            <script>$("#redirection").hide();$("#fail").hide();</script>
         <?php
-            }else{
+            /*}else{
                 $salt = "48@!alsd";
 		        $password_crypte = sha1(sha1($_POST['password']).$salt);
                 $res = $UserManager->connexion($_POST['pseudo'],$password_crypte);
@@ -62,8 +85,7 @@
                     echo "<div class=\"alert alert-danger\"><strong>Erreur!</strong> Pseudo ou Mot de passe incorrect</div>";
                 }
                 
-            }
-        //JSON POUR VOIR SI LE PSEUDO EXISTE DANS LA BASE
+            }*/
         ?>
     </div>
 </div>
@@ -72,7 +94,7 @@
     function checkPseudo(){
         var res = "";
         pseudo = document.getElementById('pseudo').value;
-        $.getJSON("include/pages/checkPseudo.php?pseudo="+pseudo, function(data){
+        $.getJSON("include/pages/checkPseudo.php?pseudo="+pseudo+"&requete=1", function(data){
             console.log(data)
             if(data=='0'){
                 if($("#div1").hasClass("has-error")){
@@ -88,6 +110,5 @@
                 }
             }
         });
-        //console.log(res);
     }
 </script>

@@ -21,14 +21,10 @@ class UserManager{
 	}
 
     public function connexion($login,$mdp){
-		$sql = "SELECT pseudo from user where pseudo=\"$login\" and password=\"$mdp\";";
+		$sql = "SELECT pseudo, id from user where pseudo=\"$login\" and password=\"$mdp\";";
 		$req = $this->db->query($sql);
 		$result = $req->fetch(PDO::FETCH_ASSOC);
-		if(empty($result)){
-			return false;
-		}else{
-			return true;
-		}
+		return $result;
 	}
 
 	public function pseudoExiste($pseudo){
@@ -44,3 +40,4 @@ class UserManager{
 		}
 	}
 }
+?>

@@ -13,37 +13,44 @@
 		<script src="bootstrap/js/bootstrap.min.js"></script>
 		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+		<script>
+			function deconnexion(){
+				$.getJSON("include/pages/checkPseudo.php?requete=3");
+				document.getElementById('loginout').innerHTML = '<ul class="nav navbar-nav navbar-right"><li><a href="index.php?page=2"><span class="glyphicon glyphicon-user"></span> Inscription</a></li><li><a href="index.php?page=1"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li></ul>';
+				$("#nouveau_post").fadeOut(300);
+			};
+
+			function load(){
+				$.getJSON("include/pages/header_connexion.inc.php",function(data){
+					document.getElementById('loginout').innerHTML = data;
+				});
+			};
+		</script>
 	</head>
 		
 	<body>
 		<div class="container">
+			<div class="jumbotron">
+				<h1>Forumation</h1>
+			</div>
 			<nav class="navbar navbar-inverse">
 				<div class="container-fluid">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="index.php?page=0">Forum louisgaume.com</a>
+						<a class="navbar-brand" href="index.php">LGF</a>
 					</div>
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="index.php?page=0">Accueil</a></li>
+						<li class="active"><a href="index.php">Accueil</a></li>
+						<li><a href="index.php">Les plus populaires</a></li>
+						<li><a href="index.php">Post Random</a></li>
 					</ul>
-					<?php
-						if(!isset($_SESSION['pseudo'])){
-					?>
-						<ul class="nav navbar-nav navbar-right">
-							<li><a href="index.php?page=2"><span class="glyphicon glyphicon-user"></span> Inscription</a></li>
-							<li><a href="index.php?page=1"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>
-						</ul>
-					<?php
-						}else{
-					?>
-						<ul class="nav navbar-nav navbar-right">
-							<li><a href="index.php?page=4"><?php echo $_SESSION['pseudo'];?></a></li>
-							<li><a href="index.php?page=3"><span class="glyphicon glyphicon-log-out"></span> Deconnexion</a></li>
-						</ul>
-					<?php
-						}
-					?>
+					<!-- Emplacement des boutons de connexion, deconnexion -->
+					<div id="loginout"></div>
+					
+					<!-- Chargement des boutons -->
+					<script>load();</script>
+
 					<!-- Implémenter recherche -->
-					<form class="navbar-form navbar-right">
+					<form class="navbar-form navbar-left">
 						<div class="input-group">
 							<input name="recherche" type="text" class="form-control" placeholder="Recherche">
 							<div class="input-group-btn">
