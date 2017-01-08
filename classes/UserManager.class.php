@@ -39,5 +39,13 @@ class UserManager{
 			return true;
 		}
 	}
+
+	public function getUser($id){
+		$sql = "SELECT id,pseudo,mail FROM user WHERE id=$id;";
+		$req = $this->db->query($sql);
+		$user = $req->fetch(PDO::FETCH_OBJ);
+		return new User($user);
+		$req->closeCursor();
+    }
 }
 ?>

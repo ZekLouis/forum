@@ -31,7 +31,7 @@
 	<body>
 		<div class="container">
 			<div class="jumbotron">
-				<h1>Forumation</h1>
+				<h1>Forum</h1>
 			</div>
 			<nav class="navbar navbar-inverse">
 				<div class="container-fluid">
@@ -40,8 +40,9 @@
 					</div>
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="index.php">Accueil</a></li>
+						<li><a href="index.php?page=8">Tous les posts</a></li>
 						<li><a href="index.php">Les plus populaires</a></li>
-						<li><a href="index.php">Post Random</a></li>
+						<li><a href="index.php?page=7">Post Random</a></li>
 					</ul>
 					<!-- Emplacement des boutons de connexion, deconnexion -->
 					<div id="loginout"></div>

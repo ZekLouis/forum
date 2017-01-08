@@ -3,17 +3,10 @@
     $db = new Mypdo();
     $UserManager = new UserManager($db);
     $PostManager = new PostManager($db);
-?>
-    <h2 class="text-center well">Accueil</h2>    
-<?php
 
-    if(isset($_SESSION['pseudo'])){
-        echo '<div class="row" id="nouveau_post"><a href="index.php?page=5" style="color:white;text-decoration:none"><button type="button" class="btn btn-primary btn-lg center-block">Nouveau post</button></a></div><hr />';
-    }
-
-    $listePost = $PostManager->getRecent();
+    $listePost = $PostManager->getAll();
 ?>
-    
+    <h2 class="text-center well">Tous les posts</h2>
     <div class="row">
     <table class="table table-hover table-bordered">
         <thead>

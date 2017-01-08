@@ -30,6 +30,14 @@
 				include_once('pages/voir_post.inc.php');
 				break;
 
+			case 7:
+				include_once('pages/randomPost.inc.php');
+				break;
+
+			case 8:
+				include_once('pages/all.inc.php');
+				break;
+
 			default : 	
 				include_once('pages/main.inc.php');
 		}
