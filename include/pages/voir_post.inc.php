@@ -13,3 +13,17 @@
     echo '<div class="well"><p>'.$post->getDescription().'</p>';
     echo '<p class="right">Publié par <strong>'.$auteur->getPseudo().'</strong> - <small><i>Le '.$date.' à '.$time.'</i></small></p></div>';
 ?>
+
+<div class="col-md-offset-4 col-md-4 well">
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="desc">Description:</label>
+        <div class="col-sm-10"> 
+            <textarea type="text" class="form-control" id="desc" placeholder="Description"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-4">
+            <button class="form-control" onclick="publish();">Publier</button>
+        </div>
+    </div>
+</div>
