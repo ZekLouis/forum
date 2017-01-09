@@ -1,6 +1,6 @@
 <?php
 
-    define('DBHOST', "192.168.1.40");
+    define('DBHOST', "louisgaume.ddns.net");
     define('DBNAME', "forum");
     define('DBUSER', "forum");
     define('DBPASSWD', "CTHeD3jM2J0wHjde");
