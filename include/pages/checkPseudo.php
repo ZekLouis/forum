@@ -13,6 +13,7 @@
     $db = new Mypdo();
     $UserManager = new UserManager($db);
     $PostManager = new PostManager($db);
+    $CommentManager = new CommentManager($db);
 
     switch($_GET['requete']){
         case 1:
@@ -48,6 +49,13 @@
             $res = $PostManager->add($post);
             echo json_encode($res);
             break;
+
+        case 5:
+            $comment = New Comment(array('id_user'=>$_GET['id_user'],'id_post'=>$_GET['id_post'],'description'=>$_GET['desc']));
+            $res = $CommentManager->add($comment);
+            echo json_encode($res);
+            break;
+
         default:
             break;
     }

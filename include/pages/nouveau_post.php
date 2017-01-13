@@ -34,7 +34,6 @@
     function publish(){
         var id = <?php echo $_SESSION['id']; ?>;
         $.getJSON("include/pages/checkPseudo.php?id_user="+id+"&sujet="+$("#sujet").val()+"&description="+$("#desc").val()+"&requete=4",function(data){
-            alert(data);
             $("#redirection").slideDown(300);
             redirect(data);
         });

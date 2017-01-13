@@ -17,7 +17,7 @@
 			function deconnexion(){
 				$.getJSON("include/pages/checkPseudo.php?requete=3");
 				document.getElementById('loginout').innerHTML = '<ul class="nav navbar-nav navbar-right"><li><a href="index.php?page=2"><span class="glyphicon glyphicon-user"></span> Inscription</a></li><li><a href="index.php?page=1"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li></ul>';
-				$("#nouveau_post").fadeOut(300);
+				$(".need_log").fadeOut(300);
 			};
 
 			function load(){
