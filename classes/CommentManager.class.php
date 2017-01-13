@@ -1,5 +1,5 @@
 <?php
-class DepartementManager{
+class CommentManager{
 	private $db;
 
 	public function __construct($db){
