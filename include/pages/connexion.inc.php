@@ -31,14 +31,15 @@
         $("#fail").slideUp(300);
         pseudo = $("#pseudo").val();
         mdp = $("#password").val();
+        $("#load").button('loading');
         $.getJSON("include/pages/checkPseudo.php?pseudo="+pseudo+"&password="+mdp+"&requete=2", function(data){
-            console.log(data)
             if(data=='0'){
                 document.getElementById('div2').className = 'input-group has-success'
-                
+                $("#load").button('reset');
                 $("#redirection").slideDown(300);
                 start();
             }else{
+                $("#load").button('reset');
                 $("#fail").slideDown(300);
             }
         });
@@ -64,7 +65,7 @@
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                     <input id="password" type="password" class="form-control form-control-success" name="password" placeholder="Password">
                 </div><br />
-                <button class="form-control" onclick="connexion();">Connexion</button>
+                <button id="load" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Connexion en cours ..." class="form-control" onclick="connexion();">Connexion</button>
            
             
             <div id="redirection" class="alert alert-success"><strong>Succès!</strong> Connexion réussie. Redirection ... </div>

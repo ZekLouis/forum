@@ -13,6 +13,7 @@
 		<script src="bootstrap/js/bootstrap.min.js"></script>
 		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<script>
 			function deconnexion(){
 				$.getJSON("include/pages/checkPseudo.php?requete=3");

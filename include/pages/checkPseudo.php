@@ -52,7 +52,7 @@
             break;
 
         case 5:
-            $comment = New Comment(array('id_user'=>$_GET['id_user'],'id_post'=>$_GET['id_post'],'description'=>$_GET['desc']));
+            $comment = New Comment(array('id_user'=>$_GET['id_user'],'id_post'=>$_GET['id_post'],'description'=>$_GET['description']));
             $res = $CommentManager->add($comment);
             echo json_encode($res);
             break;
