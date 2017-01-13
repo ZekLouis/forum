@@ -42,7 +42,7 @@
 						<li class="active"><a href="index.php">Accueil</a></li>
 						<li><a href="index.php?page=8">Tous les posts</a></li>
 						<li><a href="index.php">Les plus populaires</a></li>
-						<li><a href="index.php?page=7">Post Random</a></li>
+						<li><a href="index.php?page=6&post=-1">Post Random</a></li>
 					</ul>
 					<!-- Emplacement des boutons de connexion, deconnexion -->
 					<div id="loginout"></div>

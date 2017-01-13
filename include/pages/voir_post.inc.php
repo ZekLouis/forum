@@ -4,6 +4,10 @@
     $PostManager = new PostManager($db);
     $CommentManager = new CommentManager($db);
     
+    if($_GET['post']==-1){
+        $_GET['post'] = $PostManager->RandId();
+    }
+
     $post = $PostManager->getPost($_GET['post']);
     $auteur = $UserManager->getUser($post->getIdUser());
     $time = new DateTime($post->getDate());
