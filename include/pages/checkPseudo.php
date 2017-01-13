@@ -8,7 +8,8 @@
     include_once('../../classes/UserManager.class.php');
     include_once('../../classes/Post.class.php');
     include_once('../../classes/PostManager.class.php');
-
+    include_once('../../classes/Comment.class.php');
+    include_once('../../classes/CommentManager.class.php');
 
     $db = new Mypdo();
     $UserManager = new UserManager($db);
