@@ -22,7 +22,7 @@
         $pseudo = "Utilisateur inconnu";
     }
 ?>
-<div class="row">
+<div class="row hoverable">
     <div class="col s12 m12">
         <div class="card blue-grey darken-1">
             <div class="card-content white-text">
@@ -96,7 +96,9 @@
 ?>
 <div class="row">
     <?php
-        if($_SESSION['id']==$comment->getIdUser()){
+        if(!isset($_SESSION['id'])){
+            echo '<div class="col s8 m8">';
+        }else if($_SESSION['id']==$comment->getIdUser()){
             echo '<div class="col offset-m4 s8 m8">';
         }else{
             echo '<div class="col s8 m8">';

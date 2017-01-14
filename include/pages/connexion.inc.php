@@ -51,7 +51,7 @@
 </script>
 
 <div class="row">
-    <div class="col m6 offset-m3">
+    <div class="col s12 m6 offset-m3">
         <h2 class="center-align">Connexion</h2>
 
         <?php
@@ -74,7 +74,7 @@
                 </div>
 
                 <div class="row">
-                    <button id="load" class="col m8 offset-m2 waves-effect waves-light btn" onclick="connexion();">Connexion</button>
+                    <button id="load" class="col s8 m8 offset-s2 offset-m2 waves-effect waves-light btn" onclick="connexion();">Connexion</button>
                 </div>
 
                 <div class="row">

@@ -25,12 +25,14 @@
 			function deconnexion(){
 				$.getJSON("include/pages/checkPseudo.php?requete=3");
 				document.getElementById('loginout').innerHTML = '<ul class="right hide-on-med-and-down"><li><a href="index.php?page=2"><i class="left material-icons">perm_identity</i>Inscription</a></li><li><a href="index.php?page=1"><i class="left material-icons">input</i>Connexion</a></li></ul>';
+				document.getElementById('slide-out').innerHTML = '<li id="main" class="active"><a class="waves-effect" href="index.php">Accueil</a></li><li id="all"><a class="waves-effect" href="index.php?page=8">Tous les posts</a></li><li id="pop"><a class="waves-effect" href="index.php">Les plus populaires</a></li><li id="rand"><a class="waves-effect" href="index.php?page=6&post=-1">Post Random</a></li><li id="insc"><a class="waves-effect" href="index.php">Membres</a></li><li><a href="index.php?page=2"><i class="left material-icons">perm_identity</i>Inscription</a></li><li><a href="index.php?page=1"><i class="left material-icons">input</i>Connexion</a></li>';
 				$(".need_log").fadeOut(300);
 			};
 
 			function load(){
 				$.getJSON("include/pages/header_connexion.inc.php",function(data){
-					document.getElementById('loginout').innerHTML = data;
+					document.getElementById('loginout').innerHTML = '<ul class="right hide-on-med-and-down">'+data+'</ul>';
+					document.getElementById('slide-out').innerHTML += data;
 				});
 			};
 		</script>
@@ -43,19 +45,36 @@
 			<h1>Forum</h1>
 		</div>
 			<nav>
-				<div class="nav-wrapper">
+				<div class="nav-wrapper teal lighten-1">
 					<ul id="nav-mobile" class="left hide-on-med-and-down">
-						<li id="main" class="active"><a href="index.php">Accueil</a></li>
-						<li id="all"><a href="index.php?page=8">Tous les posts</a></li>
-						<li id="pop"><a href="index.php">Les plus populaires</a></li>
-						<li id="rand"><a href="index.php?page=6&post=-1">Post Random</a></li>
-						<li id="insc"><a href="index.php">Membres</a></li>
+						<li id="main" class="active"><a class="waves-effect" href="index.php">Accueil</a></li>
+						<li id="all"><a class="waves-effect" href="index.php?page=8">Tous les posts</a></li>
+						<li id="pop"><a class="waves-effect" href="index.php">Les plus populaires</a></li>
+						<li id="rand"><a class="waves-effect" href="index.php?page=6&post=-1">Post Random</a></li>
+						<li id="insc"><a class="waves-effect" href="index.php">Membres</a></li>
 					</ul>
+					<ul id="slide-out" class="side-nav hide-on-large-only">
+						<li id="main" class="active"><a class="waves-effect" href="index.php">Accueil</a></li>
+						<li id="all"><a class="waves-effect" href="index.php?page=8">Tous les posts</a></li>
+						<li id="pop"><a class="waves-effect" href="index.php">Les plus populaires</a></li>
+						<li id="rand"><a class="waves-effect" href="index.php?page=6&post=-1">Post Random</a></li>
+						<li id="insc"><a class="waves-effect" href="index.php">Membres</a></li>
+					</ul>
+					<a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
 					<!-- Emplacement des boutons de connexion, deconnexion -->
 					<div id="loginout"></div>
 					
-					<!-- Chargement des boutons -->
-					<script>load();</script>
+					<!-- Chargement des boutons et menu mobile-->
+					<script>
+						load();
+						$('.button-collapse').sideNav({
+							menuWidth: 300, // Default is 240
+							edge: 'left', // Choose the horizontal origin
+							closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+							draggable: true // Choose whether you can drag to open on touch screens
+						}
+						);
+					</script>
 
 					<!-- Implémenter recherche -->				
 				</div>
