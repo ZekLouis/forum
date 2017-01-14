@@ -8,7 +8,7 @@
 <?php
 
     if(isset($_SESSION['pseudo'])){
-        echo '<div class="row need_log" id="nouveau_post"><a href="index.php?page=5" style="color:white;text-decoration:none"><button type="button" class="btn">Nouveau post</button></a><hr /></div>';
+        echo '<div class="row need_log" id="nouveau_post"><a href="index.php?page=5" style="color:white;text-decoration:none"><button type="button" class="btn col offset-m4 m4 s12">Nouveau post</button></a></div><hr />';
     }
 
     $listePost = $PostManager->getRecent();

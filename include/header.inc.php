@@ -6,7 +6,7 @@
 		<meta charset="utf-8">
 
 		<?php
-				$title = "Forum louisgaume.com";
+				$title = "Hoowe";
 		?>
 		<title><?php echo $title ?></title>
 		<script src="bootstrap/js/jquery.js"></script>
@@ -42,7 +42,7 @@
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       	<script type="text/javascript" src="js/materialize.min.js"></script>
 		<div class="container">
-			<h1>Forum</h1>
+			<h1>Hoowe</h1>
 		</div>
 			<nav>
 				<div class="nav-wrapper teal lighten-1">
@@ -81,9 +81,9 @@
 			</nav>
 			<form action="index.php" method="GET">
 				<div class="row">
-					<div class="input-field col m12 s12">
-						<input name="recherche" type="text" class="col m4 s9" placeholder="Recherche">
-						<button class="btn waves-effect waves-light" type="submit"><i class="material-icons">search</i></button>
+					<div class="input-field col offset-m4 m4 s12">
+						<input name="recherche" type="text" class="col m11 s9" placeholder="Recherche">
+						<button class="btn waves-effect waves-light col m1 s3" type="submit"><i class="material-icons">search</i></button>
 					</div>
 					<input name="page" type="hidden" value="9">
 					
