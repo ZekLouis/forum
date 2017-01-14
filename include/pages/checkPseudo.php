@@ -57,6 +57,16 @@
             echo json_encode($res);
             break;
 
+        case 6:
+            $res = $PostManager->upLike($_GET['post']);
+            echo json_encode($res);
+            break;
+
+        case 7:
+            $res = $PostManager->upDislike($_GET['post']);
+            echo json_encode($res);
+            break;
+
         default:
             break;
     }

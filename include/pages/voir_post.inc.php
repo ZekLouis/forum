@@ -17,34 +17,59 @@
     $time = $time->format('H:i:s');
     $newDate = date("d-m-Y", strtotime($post->getDate()));
     $date = str_replace('-','/',$newDate);
-    echo '<h2 class="text-center well well-lg">'.$post->getSujet().'</h2>';
-    echo '<div class="well well-lg"><p>'.$post->getDescription().'</p>';
     $pseudo = $auteur->getPseudo();
     if($pseudo==""){
         $pseudo = "Utilisateur inconnu";
     }
-    echo '<p class="right">Publié par <strong>'.$pseudo.'</strong> - <small><i>Le '.$date.' à '.$time.'</i></small></p></div>';
 ?>
+<div class="row">
+    <div class="col s12 m12">
+        <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+                <span class="card-title"><?php echo $post->getSujet(); ?></span>
+                <p><?php echo $post->getDescription(); ?></p>
+            </div>
+            <div class="card-action">
+                <a href="#" onclick="javascript:like()"><?php echo $post->getLike(); ?> <i class="tiny material-icons">thumb_up</i></a>
+                <a href="#" onclick="javascript:dislike()"><?php echo $post->getDislike(); ?> <i class="tiny material-icons">thumb_down</i></a>
+                <?php echo '<a class="right">Publié par <strong>'.$pseudo.'</strong> - <small><i>Le '.$date.' à '.$time.'</i></small></a>'; ?>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     function publish(){
         desc = $("#desc").val();
         id_post = <?php echo $_GET['post'];?>;
-        id_user = <?php echo $_SESSION['id'];?>;
-        $("#load").button('loading');
+        id_user = <?php if(isset($_SESSION['id'])){echo $_SESSION['id'];}else{echo "\"\"";};?>;
         $.getJSON("include/pages/checkPseudo.php?id_user="+id_user+"&id_post="+id_post+"&description="+desc+"&requete=5",function(data){
             if(data==true){
-                $("#load").button('reset');
                 $('#desc').val('');
-                $("#div_comment").addClass('has-success has-feedback');
-                $('#desc').attr("placeholder", "Publication réussie !");
+                $("#load").addClass('disable');
+                $("#ret_pub").slideDown(300);
+                setTimeout(function(){ window.location.reload(); }, 2000);
             }else{
-                $("#load").button('reset');
-                $("#div_comment").addClass('has-error has-feedback');
-                $('#desc').attr("placeholder", "Echec de la publication");
+                $("#load").removeClass('disable');
             }
         });
         
+    }
+
+    function like(){
+        $.getJSON("include/pages/checkPseudo.php?post="+<?php echo $_GET['post']; ?>+"&requete=6",function(data){
+            if(data==true){
+                window.location.reload();
+            }
+        });
+    }
+
+    function dislike(){
+        $.getJSON("include/pages/checkPseudo.php?post="+<?php echo $_GET['post']; ?>+"&requete=7",function(data){
+            if(data==true){
+                window.location.reload();
+            }
+        });
     }
 </script>
 
@@ -62,29 +87,60 @@
         if($pseudo==""){
             $pseudo = "Utilisateur inconnu";
         }
-        if($_SESSION['id']==$comment->getIdUser()){
+        /*if($_SESSION['id']==$comment->getIdUser()){
             echo "<div class=\"col-md-offset-3 col-md-8 well well-sm\">";
         }else{
             echo "<div class=\"col-md-offset-1 col-md-8 well well-sm\">";
-        }
-        echo "<p>".$comment->getDescription()."</p>";
-        echo '<p class="right">Publié par <strong>'.$pseudo.'</strong> - <small><i>Le '.$date.' à '.$time.'</i></small></p></div>';
-    }
-    if(isset($_SESSION['pseudo'])){
+        }*/
+        
 ?>
-<div class="need_log col-md-offset-3 col-md-6 well">
-    <div id="div_comment" class="form-group">
-        <label class="control-label col-md-4" for="desc">Commentaire:</label>
-        <div class="col-sm-12"> 
-            <textarea type="text" class="form-control" id="desc" placeholder="Description"></textarea>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-4 col-sm-4">
-            <button type="button" id="load" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Publication" class="form-control" onclick="publish();">Publier</button>
+<div class="row">
+    <?php
+        if($_SESSION['id']==$comment->getIdUser()){
+            echo '<div class="col offset-m4 s8 m8">';
+        }else{
+            echo '<div class="col s8 m8">';
+        }
+    ?>
+        <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+                <span class="card-title"><?php echo $pseudo; ?></span>
+                <p><?php echo $comment->getDescription(); ?></p>
+            </div>
+            <div class="card-action">
+                <?php echo '<a>Publié par <strong>'.$pseudo.'</strong> - <small><i>Le '.$date.' à '.$time.'</i></small></a>'; ?>
+            </div>
         </div>
     </div>
 </div>
+<?php
+    }
+    if(isset($_SESSION['pseudo'])){
+?>
+<div class="need_log">
+    <div id="div_comment" class="row">
+        <div class="input-field col offset-m3 m6">
+            <textarea id="desc" class="materialize-textarea" length="300"></textarea>
+            <label for="desc">Commentaire</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col offset-m5">
+            <button type="button" id="load" class="btn" onclick="publish();">Publier</button>
+        </div>
+    </div>
+</div>
+<div id="ret_pub" class="row">
+    <div class="col s12 m12">
+        <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+                <span class="card-title">Succès !</span>
+                <p>Publication réussie. Rafraichissement en cours ...</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>$("#ret_pub").hide();</script>
 <?php
     }
 ?>

@@ -5,6 +5,8 @@ class Post{
 	private $date ;
 	private $sujet ;
     private $description ;
+    private $like;
+    private $dislike;
 
 	public function __construct($valeurs = array()){
 		if(!empty($valeurs)){
@@ -35,6 +37,14 @@ class Post{
                     $this->setDescription($valeur);
                     break;
 
+                case 'like_l':
+                    $this->setLike($valeur);
+                    break;
+
+                case 'dislike':
+                    $this->setDislike($valeur);
+                    break;
+
 				default:
 					break;
 			}
@@ -59,6 +69,22 @@ class Post{
 
     public function setDescription($valeur){
         $this->description = $valeur;
+    }
+
+    public function setLike($valeur){
+        $this->like = $valeur;
+    }
+
+    public function setDislike($valeur){
+        $this->dislike = $valeur;
+    }
+
+    public function getLike(){
+        return $this->like;
+    }
+
+    public function getDislike(){
+        return $this->dislike;
     }
 
     public function getId(){

@@ -17,7 +17,7 @@
 
     function bip(){
         counterTemp = counter - 1 
-        document.getElementById("redirection").innerHTML = "<strong>Succès!</strong> Connexion réussie. Redirection ... " + counterTemp;
+        //document.getElementById("redirection").innerHTML = "<strong>Succès!</strong> Connexion réussie. Redirection ... " + counterTemp;
         counter--;
     }
     
@@ -31,24 +31,28 @@
         $("#fail").slideUp(300);
         pseudo = $("#pseudo").val();
         mdp = $("#password").val();
-        $("#load").button('loading');
+        $("#load").addClass("disable");
+        $(".progress").show();
         $.getJSON("include/pages/checkPseudo.php?pseudo="+pseudo+"&password="+mdp+"&requete=2", function(data){
             if(data=='0'){
-                document.getElementById('div2').className = 'input-group has-success'
-                $("#load").button('reset');
-                $("#redirection").slideDown(300);
+                /*document.getElementById('div2').className = 'input-group has-success'
+                $("#load").button('reset');*/
+                $("#redirection").show();
+                $(".progress").hide();
                 start();
             }else{
-                $("#load").button('reset');
+                /*$("#load").button('reset');*/
                 $("#fail").slideDown(300);
+                $(".progress").hide();
+                $("#load").removeClass("disable");
             }
         });
     }
 </script>
 
 <div class="row">
-    <div class="col-md-4 col-lg-offset-4">
-        <h2 class="text-center">Connexion</h2>
+    <div class="col m6 offset-m3">
+        <h2 class="center-align">Connexion</h2>
 
         <?php
             //if(!isset($_POST['pseudo']) and !isset($_POST['password'])){
@@ -57,19 +61,50 @@
            
                 <!-- <label>Pseudo :</label><br />
                 <input class="form-control" name="pseudo" required /><br /> -->
-                <div id="div1" class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input id="pseudo" type="text" class="form-control form-control-success" onchange="checkPseudo();" name="pseudo" placeholder="Pseudo">
-                </div><br />
-                <div id="div2" class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input id="password" type="password" class="form-control form-control-success" name="password" placeholder="Password">
-                </div><br />
-                <button id="load" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Connexion en cours ..." class="form-control" onclick="connexion();">Connexion</button>
+                <div class="input-field">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input name="pseudo" id="pseudo" type="text" class="validate">
+                    <label for="pseudo">Pseudo</label>
+                </div>
+                
+                <div id="div2" class="input-field">
+                    <i class="material-icons prefix">vpn_key</i>
+                    <input id="password" type="password" name="password" class="validate">
+                    <label for="password">Password</label>
+                </div>
+
+                <div class="row">
+                    <button id="load" class="col m8 offset-m2 waves-effect waves-light btn" onclick="connexion();">Connexion</button>
+                </div>
+
+                <div class="row">
+                    <div class="progress">
+                        <div class="indeterminate"></div>
+                    </div>
+                </div>
+
+                <script>$(".progress").hide();</script>
            
-            
-            <div id="redirection" class="alert alert-success"><strong>Succès!</strong> Connexion réussie. Redirection ... </div>
-            <div id="fail" class="alert alert-danger"><strong>Erreur!</strong> Pseudo ou Mot de passe incorrect</div>
+            <div id="fail" class="row">
+                <div class="col s12 m12">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                    <span class="card-title">Erreur</span>
+                    <p>Problème de mot de passe ou de pseudo.</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div id="redirection" class="row">
+                <div class="col s12 m12">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                    <span class="card-title">Succès !</span>
+                    <p>Connexion réussie. Redirection en cours ...</p>
+                    </div>
+                </div>
+                </div>
+            </div>
             <script>$("#redirection").hide();$("#fail").hide();</script>
         <?php
             /*}else{
@@ -92,6 +127,7 @@
 </div>
 
 <script>
+    //Obsolète
     function checkPseudo(){
         var res = "";
         pseudo = document.getElementById('pseudo').value;

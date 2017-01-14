@@ -1,24 +1,19 @@
 <?php
+    echo "<h2 class='center-align'>Recherche</h2>";
 
     $db = new Mypdo();
-    $UserManager = new UserManager($db);
     $PostManager = new PostManager($db);
-?>
-    <h2 class="center-align">Accueil</h2>    
-<?php
+    $UserManager = new UserManager($db);
 
-    if(isset($_SESSION['pseudo'])){
-        echo '<div class="row need_log" id="nouveau_post"><a href="index.php?page=5" style="color:white;text-decoration:none"><button type="button" class="btn">Nouveau post</button></a><hr /></div>';
-    }
-
-    $listePost = $PostManager->getRecent();
+    $listePost = $PostManager->search($_GET['recherche']);
 ?>
     
     <div class="row">
-    <table class="table table-hover table-bordered">
+    <table class="striped">
         <thead>
             <tr>
                 <th class="col-xs-2">Date de publication</th>
+                <th class="col-xs-1">Auteur</th>
                 <th class="col-xs-2">Sujet</th>
                 <th>Description</th>
             </tr>
@@ -33,6 +28,11 @@
                     $date = str_replace('-','/',$newDate);
                     echo '<tr>';
                     echo "<td>".$date." à ".$time."</td>";
+                    $user = $UserManager->getUser($post->getIdUser())->getPseudo();
+                    if($user==""){
+                        $user="Utilisateur inconnu";
+                    }
+                    echo "<td>".$user."</td>";
                     echo '<td><a href="index.php?page=6&post='.$post->getId().'">'.$post->getSujet().'</a></td>';
                     echo "<td>".$post->getDescription()."</td>";
                     echo "</tr>";

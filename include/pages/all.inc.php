@@ -6,13 +6,13 @@
 
     $listePost = $PostManager->getAll();
 ?>
-    <h2 class="text-center well">Tous les posts</h2>
+    <h2 class="center-align">Tous les posts</h2>
     <div class="row">
-    <table class="table table-hover table-bordered">
+    <table class="striped">
         <thead>
             <tr>
-                <th class="col-xs-2">Date de publication</th>
-                <th class="col-xs-2">Sujet</th>
+                <th class="">Date de publication</th>
+                <th class="">Sujet</th>
                 <th>Description</th>
             </tr>
         </thead>
